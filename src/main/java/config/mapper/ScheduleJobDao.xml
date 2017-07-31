@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.nieyue.dao.ScheduleJobDao">
+<!-- 添加定时任务-->
+<insert id="addScheduleJob" parameterType="ScheduleJob" keyProperty="scheduleJobId" flushCache="true"  >  
+   INSERT IGNORE INTO
+   		  schedule_job_tb 
+   		 (
+   		 create_date,
+   		 cron_expression,
+   		 description,
+   		 job_group,
+   		 job_id,
+   		 job_name,
+   		 job_status,
+   		 method_name,
+   		 type,
+   		 update_date)
+   VALUES
+    	 (
+    	 #{createDate},
+    	 #{cronExpression},
+    	 #{description},
+    	 #{jobGroup},
+    	 #{jobId},
+    	 #{jobName},
+    	 #{jobStatus},
+    	 #{methodName},
+    	 #{type},
+    	 #{updateDate})  
+</insert>  
+<!-- 更新定时任务-->
+<update id="updateScheduleJob" parameterType="ScheduleJob" >  
+    UPDATE 
+    	schedule_job_tb 
+    SET 
+    	 create_date=#{createDate},
+    	 cron_expression=#{cronExpression},
+    	 description=#{description},
+    	 job_group=#{jobGroup},
+    	 job_id=#{jobId},
+    	 job_name=#{jobName},
+    	 job_status=#{jobStatus},
+    	 method_name=#{methodName},
+    	 type=#{type},
+    	 update_date=#{updateDate}
+    WHERE
+    	 schedule_job_id=#{scheduleJobId} 
+</update> 
+<!-- 删除定时任务-->
+<delete id="delScheduleJob"  parameterType="Integer" >  
+    DELETE FROM
+    	 schedule_job_tb 
+    	 WHERE schedule_job_id=#{scheduleJobId}
+</delete>  
+<!-- 加载定时任务-->
+<select id="loadScheduleJob" parameterType="Integer" resultType="ScheduleJob" >
+SELECT 
+		 schedule_job_id,
+	 	 create_date,
+   		 cron_expression,
+   		 description,
+   		 job_group,
+   		 job_id,
+   		 job_name,
+   		 job_status,
+   		 method_name,
+   		 type,
+   		 update_date
+FROM schedule_job_tb 
+WHERE schedule_job_id=#{scheduleJobId}
+</select>
+
+<!-- 分页查询定时任务-->
+<select id="browsePagingScheduleJob" resultType="ScheduleJob">  
+  
+   SELECT
+	     schedule_job_id,
+	 	 create_date,
+   		 cron_expression,
+   		 description,
+   		 job_group,
+   		 job_id,
+   		 job_name,
+   		 job_status,
+   		 method_name,
+   		 type,
+   		 update_date
+	FROM schedule_job_tb
+	WHERE ${orderName}  
+	<if test="orderWay=='asc'">
+	<![CDATA[>=]]> 
+	</if>
+	<if test="orderWay=='desc'">
+	  <![CDATA[<= ]]>
+	</if>
+	(SELECT ${orderName} FROM schedule_job_tb 
+		ORDER BY 
+			${orderName}  ${orderWay}
+		LIMIT #{pageNum}, 1
+		) 
+	ORDER BY
+		${orderName}  ${orderWay}
+	LIMIT
+		#{pageSize} 
+</select> 
+
+<!-- 统计记录条数 -->
+<select id="countAll"  resultType="int">  
+	SELECT
+	 	count(schedule_job_id)
+	FROM schedule_job_tb
+</select>   
+   
+ 
+</mapper>
