@@ -18,7 +18,6 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.nieyue.bean.ScheduleJob;
-import com.nieyue.dao.ScheduleJobDao;
 import com.nieyue.interceptor.TestApiControllerInterceptor;
 import com.nieyue.schedule.QuartzEventService;
 import com.nieyue.service.ScheduleJobService;

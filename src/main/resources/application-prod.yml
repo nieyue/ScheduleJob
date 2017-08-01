@@ -19,7 +19,7 @@ spring:
 #    hibernate:
 #      ddl-auto: update
 #      database-platform: org.hibernate.dialect.MySQL5Dialect   
-#  redis: 
+  redis: 
     host: 39.108.60.100
     password: liliu
     port: 6379 
@@ -30,7 +30,7 @@ spring:
       max-idle: 300
       max-active: 800 
 myPugin:
-  projectName: Task
+  projectName: ScheduleJob
   testApi: true 
   session: 
     myDomainName: newzhuan.cn
