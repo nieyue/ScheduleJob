@@ -1,5 +1,5 @@
 server:
-  port: 8083
+  port: 8001
   session:
     timeout: 1800
   #address: acount.yayao8.com

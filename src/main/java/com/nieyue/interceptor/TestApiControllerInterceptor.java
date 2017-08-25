@@ -38,9 +38,9 @@ public class TestApiControllerInterceptor implements HandlerInterceptor {
     	   if(!testApi){
     		   throw new TestApiException();
     	   }
-    	   
+    	   return true;
        }
-       //没有权限auth
+       //没有内部权限auth
        if(request.getParameter ("auth")==null||!request.getParameter("auth").equals(MyDESutil.getMD5(1000))){
     	   throw new MySessionException();
        }
