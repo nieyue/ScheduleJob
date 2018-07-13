@@ -9,11 +9,11 @@ import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletCont
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.boot.web.servlet.ErrorPage;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -27,6 +27,7 @@ import com.nieyue.service.ScheduleJobService;
 //@Import({DynamicDataSourceRegister.class})
 //@EnableJpaRepositories(basePackages = "com.nieyue.dao")
 //@EntityScan(basePackages = "com.nieyue.bean")
+@ServletComponentScan
 public class MyApplication extends WebMvcConfigurerAdapter  implements ApplicationListener<ApplicationReadyEvent>{
 	@Resource
 	TestApiControllerInterceptor testApiControllerInterceptor;
@@ -34,12 +35,12 @@ public class MyApplication extends WebMvcConfigurerAdapter  implements Applicati
 		SpringApplication.run(MyApplication.class,args);
 		
 	}
-	 @Override
+	/* @Override
 	  public void addCorsMappings(CorsRegistry registry) {
 	    registry.addMapping("/**").allowedOrigins("*")
 	   .allowCredentials(true)
 	    .allowedMethods("POST","GET", "OPTIONS", "DELETE").allowedHeaders("x-requested-with");
-	  }
+	  }*/
 	 
 	 /** 
 	     * 配置拦截器 

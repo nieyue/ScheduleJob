@@ -170,7 +170,6 @@ public class QuartzEventServiceImpl implements QuartzEventService {
           jobDetail.getJobDataMap().put("scheduleJobId", scheduleJobId);
           jobDetail.getJobDataMap().put("updateDate", updateDate);
           jobDetail.getJobDataMap().put("jobStatus", jobStatus);
-          
           jobDetail.getJobBuilder().withDescription(jobDescription);  
           HashSet<Trigger> triggerSet = new HashSet<Trigger>();  
           triggerSet.add(cronTrigger);  
@@ -203,8 +202,13 @@ public class QuartzEventServiceImpl implements QuartzEventService {
 	  boolean b=false;
 	  try {  
 		  if (checkExists(jobName, jobGroup)) {  
-			  scheduler.pauseTrigger(triggerKey);  
-			b = scheduler.deleteJob(new JobKey(jobName, jobGroup));  
+			  scheduler.pauseTrigger(triggerKey); 
+			  boolean isExists = checkExists(jobName, jobGroup);
+			  if(isExists){				  
+			  b = scheduler.deleteJob(new JobKey(jobName, jobGroup));  
+			  }else{
+				  b=true;
+			  }
 		  }  
 	  } catch (SchedulerException e) {  
 	  }  

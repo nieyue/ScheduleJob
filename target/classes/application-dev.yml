@@ -24,7 +24,7 @@ spring:
     host: 127.0.0.1
     password: liliu
     port: 6379 
-    database: 3
+    database: 1
     timeout: 3000
     pool: 
       min-idle: 100
@@ -35,5 +35,6 @@ myPugin:
   testApi: true 
   session: 
     myDomainName: null
-  quartzJobUrl: http://localhost/scheduleJob/test/accept?auth=f57bf16dbc05fe4f6a2e29ddf6bdc0a4
+  #quartzJobUrl: http://localhost/scheduleJob/test/accept?auth=f57bf16dbc05fe4f6a2e29ddf6bdc0a4
+  quartzJobUrl: http://192.168.11.111/scheduleJob/accept?auth=f57bf16dbc05fe4f6a2e29ddf6bdc0a4
     

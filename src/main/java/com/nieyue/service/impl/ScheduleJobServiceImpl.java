@@ -52,7 +52,8 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
 	public boolean updateScheduleJob(ScheduleJob scheduleJob) {
 		scheduleJob.setUpdateDate(new Date());
 		boolean b = scheduleJobDao.updateScheduleJob(scheduleJob);
-		b=quartzEventService.updateScheduleJob(scheduleJob);
+		b=quartzEventService.delScheduleJob(scheduleJob.getJobName(), scheduleJob.getJobGroup());
+		b=quartzEventService.addScheduleJob(scheduleJob);
 		return b;
 	}
 	@Override

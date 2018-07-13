@@ -1,7 +1,6 @@
 package com.nieyue.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -9,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -144,6 +142,22 @@ public class ScheduleJobController {
 		List<ScheduleJob> l=new ArrayList<ScheduleJob>();
 		ScheduleJob sj = scheduleJobService.loadScheduleJob(scheduleJobId);
 		l.add(sj);
+		return ResultUtil.getSlefSRSuccessList(l);
+		
+	}
+	/**
+	 *总数
+	 * @return
+	 * @throws SchedulerException 
+	 */
+	@RequestMapping(value={"/count"})
+	public StateResultList countAll(
+			HttpSession session,
+			HttpServletResponse response
+			) throws SchedulerException{
+		List<Integer> l=new ArrayList<Integer>();
+		int f = scheduleJobService.countAll();
+		l.add(f);
 		return ResultUtil.getSlefSRSuccessList(l);
 		
 	}

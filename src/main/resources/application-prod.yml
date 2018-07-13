@@ -11,7 +11,7 @@ server:
  # connection-timeout: 60 
 spring: 
   datasource:
-    url: jdbc:mysql://39.108.60.100:3306/schedule_job_db
+    url: jdbc:mysql://120.77.253.90:3306/schedule_job_db
     username: root
     password: liliu
     driver-class-name:  com.mysql.jdbc.Driver  
@@ -20,10 +20,10 @@ spring:
 #      ddl-auto: update
 #      database-platform: org.hibernate.dialect.MySQL5Dialect   
   redis: 
-    host: 39.108.60.100
+    host: 120.77.253.90
     password: liliu
     port: 6379 
-    database: 3
+    database: 1
     timeout: 3000
     pool: 
       min-idle: 100
@@ -34,4 +34,4 @@ myPugin:
   testApi: true 
   session: 
     myDomainName: newzhuan.cn
-  quartzJobUrl: http://www.newzhuan.cn/scheduleJob/accept
+  quartzJobUrl: http://www.newzhuan.cn/scheduleJob/accept?auth=f57bf16dbc05fe4f6a2e29ddf6bdc0a4
