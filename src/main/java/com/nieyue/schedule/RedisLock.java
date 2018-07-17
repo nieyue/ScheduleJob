@@ -44,12 +44,13 @@ public class RedisLock {
             String ip = InetAddress.getLocalHost().getHostAddress();
             // 获取服务器上的工作ip
             BoundValueOperations<String, String> srt = stringRedisTemplate.boundValueOps(lockKey);
-            String currentIp = srt.get();
+              Boolean b = srt.setIfAbsent(ip);//不存在就存储，存在则不存储
             // 如果为空的时候，设置进去
-            if(currentIp == null){
-            	srt.set(ip, 1, TimeUnit.SECONDS);
+            if(b != null&&b){
+            	srt.expire(1, TimeUnit.SECONDS);
                 return true;
             }
+            String currentIp = srt.get();
             // 就是当前机器，则返回true
             if(currentIp.equals(ip)){
                 return true;
